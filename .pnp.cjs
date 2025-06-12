@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@types/animejs", "npm:3.1.13"],\
           ["animejs", "npm:4.0.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["vite", "virtual:ee250a8850777ee340994b6f1f1bfd30aa99ba32308d6ee7b67d1b6c8294e7c90cb41fd88f4dbc5f3f2313f1d4bfc726eb2810127927092324ea650cc18b879f#npm:6.3.5"]\
@@ -502,6 +503,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/@rollup-rollup-win32-x64-msvc-npm-4.43.0-46b5c38452/node_modules/@rollup/rollup-win32-x64-msvc/",\
         "packageDependencies": [\
           ["@rollup/rollup-win32-x64-msvc", "npm:4.43.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/animejs", [\
+      ["npm:3.1.13", {\
+        "packageLocation": "../../../.yarn/berry/cache/@types-animejs-npm-3.1.13-441599515b-10c0.zip/node_modules/@types/animejs/",\
+        "packageDependencies": [\
+          ["@types/animejs", "npm:3.1.13"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -991,6 +1001,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["min-hourglass", "workspace:."],\
+          ["@types/animejs", "npm:3.1.13"],\
           ["animejs", "npm:4.0.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["vite", "virtual:ee250a8850777ee340994b6f1f1bfd30aa99ba32308d6ee7b67d1b6c8294e7c90cb41fd88f4dbc5f3f2313f1d4bfc726eb2810127927092324ea650cc18b879f#npm:6.3.5"]\

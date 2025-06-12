@@ -372,6 +372,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/animejs@npm:^3.1.13":
+  version: 3.1.13
+  resolution: "@types/animejs@npm:3.1.13"
+  checksum: 10c0/6c1c977417a699bf4c3eaf6fdb948ea29011543f69370f98f7c7bac42aadb3309dda23a8415738f7480eed1a355b6ee130d1405339cd031a876774fc8e6f6c47
+  languageName: node
+  linkType: hard
+
 "@types/estree@npm:1.0.7":
   version: 1.0.7
   resolution: "@types/estree@npm:1.0.7"
@@ -846,6 +853,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "min-hourglass@workspace:."
   dependencies:
+    "@types/animejs": "npm:^3.1.13"
     animejs: "npm:^4.0.2"
     typescript: "npm:~5.8.3"
     vite: "npm:^6.3.5"
