@@ -87,12 +87,25 @@ let dragStartValue: number
 let activeDragUnit: keyof typeof time | null = null
 const dragSensitivity = 15 // pixels per unit change
 
+// For momentum
+let lastDragTime: number = 0
+let lastDragY: number = 0
+let dragVelocity: number = 0
+let momentumAnimationFrame: number | null = null
+
 function onDragStart(event: MouseEvent | TouchEvent, unit: keyof typeof time) {
     if (countdownInterval || (event.target as HTMLElement).classList.contains('dial-btn')) return
     isDragging = true
     activeDragUnit = unit
     dragStartY = 'touches' in event ? event.touches[0].clientY : event.clientY
     dragStartValue = time[unit]
+    lastDragY = dragStartY
+    lastDragTime = performance.now()
+    dragVelocity = 0
+    if (momentumAnimationFrame !== null) {
+        cancelAnimationFrame(momentumAnimationFrame)
+        momentumAnimationFrame = null
+    }
     document.body.style.cursor = 'ns-resize'
     timerInputs.style.pointerEvents = 'none' // Prevent spurious events on other elements
     event.preventDefault()
@@ -113,11 +126,10 @@ function onDragMove(event: MouseEvent | TouchEvent) {
     let newValue = dragStartValue + valueChange
     const unit = activeDragUnit
 
+    // Clamp values
     if (unit === 'minutes' || unit === 'seconds') {
-        // Clamp between 0 and 59
         newValue = Math.max(0, Math.min(59, newValue))
     } else { // hours
-        // Clamp between 0 and 24
         newValue = Math.max(0, Math.min(24, newValue))
     }
 
@@ -125,18 +137,78 @@ function onDragMove(event: MouseEvent | TouchEvent) {
         time[unit] = newValue
         updateDisplay(unit)
     }
+
+    // Track velocity for momentum
+    const now = performance.now()
+    const dy = lastDragY - currentY
+    const dt = now - lastDragTime
+    if (dt > 0) {
+        dragVelocity = dy / dt // pixels per ms
+    }
+    lastDragY = currentY
+    lastDragTime = now
 }
 
 function onDragEnd() {
     isDragging = false
-    activeDragUnit = null
     document.body.style.cursor = 'default'
     timerInputs.style.pointerEvents = 'auto'
-
     window.removeEventListener('mousemove', onDragMove)
     window.removeEventListener('touchmove', onDragMove)
     window.removeEventListener('mouseup', onDragEnd)
     window.removeEventListener('touchend', onDragEnd)
+
+    if (activeDragUnit && Math.abs(dragVelocity) > 0.05) {
+        startMomentum(activeDragUnit, dragVelocity)
+    }
+    activeDragUnit = null
+}
+
+function startMomentum(unit: keyof typeof time, initialVelocity: number) {
+    let value = time[unit]
+    let velocity = initialVelocity * 10 // scale velocity for dial units
+    const friction = 0.92 // base friction per frame
+    const resistanceStrength = 0.7 // extra resistance at multiples of 5
+    const frame = () => {
+        // Apply resistance for minutes/seconds at multiples of 5
+        if ((unit === 'minutes' || unit === 'seconds') && Math.abs(velocity) > 0.1) {
+            const distToNearest5 = Math.abs((value % 5) - 5 * Math.round(value / 5))
+            if (distToNearest5 < 1) {
+                velocity *= resistanceStrength // extra slow near multiples of 5
+            }
+        }
+        value += velocity
+        // Clamp
+        if (unit === 'minutes' || unit === 'seconds') {
+            if (value < 0) { value = 0; velocity = 0; }
+            if (value > 59) { value = 59; velocity = 0; }
+        } else {
+            if (value < 0) { value = 0; velocity = 0; }
+            if (value > 24) { value = 24; velocity = 0; }
+        }
+        // Snap to integer
+        const intValue = Math.round(value)
+        if (time[unit] !== intValue) {
+            time[unit] = intValue
+            updateDisplay(unit)
+        }
+        velocity *= friction
+        if (Math.abs(velocity) > 0.1) {
+            momentumAnimationFrame = requestAnimationFrame(frame)
+        } else {
+            // Snap to nearest 5 for minutes/seconds if close
+            if ((unit === 'minutes' || unit === 'seconds')) {
+                const mod = intValue % 5
+                if (mod !== 0 && Math.abs(mod) < 2) {
+                    const snapValue = Math.round(intValue / 5) * 5
+                    time[unit] = Math.max(0, Math.min(59, snapValue))
+                    updateDisplay(unit)
+                }
+            }
+            momentumAnimationFrame = null
+        }
+    }
+    momentumAnimationFrame = requestAnimationFrame(frame)
 }
 
 Object.entries(displays).forEach(([unit, displayElement]) => {
