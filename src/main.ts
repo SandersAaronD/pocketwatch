@@ -11,14 +11,14 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             </div>
             <div class="dial-label">Hours</div>
         </div>
-        <div class="dial-separator">:</div>
+        <div class="dial-separator"></div>
         <div class="dial-container">
             <div class="dial">
                 <div class="dial-display" id="minutes-display">01</div>
             </div>
             <div class="dial-label">Minutes</div>
         </div>
-        <div class="dial-separator">:</div>
+        <div class="dial-separator"></div>
         <div class="dial-container">
             <div class="dial">
                 <div class="dial-display" id="seconds-display">30</div>
@@ -38,7 +38,7 @@ const timerInputs = document.querySelector<HTMLDivElement>('#timer-inputs')!
 const time = {
   hours: 0,
   minutes: 1,
-  seconds: 30,
+  seconds: 0,
 }
 
 const displays = {
