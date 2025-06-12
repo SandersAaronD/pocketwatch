@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["animejs", "npm:4.0.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["vite", "virtual:ee250a8850777ee340994b6f1f1bfd30aa99ba32308d6ee7b67d1b6c8294e7c90cb41fd88f4dbc5f3f2313f1d4bfc726eb2810127927092324ea650cc18b879f#npm:6.3.5"]\
         ],\
@@ -532,6 +533,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["animejs", [\
+      ["npm:4.0.2", {\
+        "packageLocation": "../../../.yarn/berry/cache/animejs-npm-4.0.2-1c6ec66dcd-10c0.zip/node_modules/animejs/",\
+        "packageDependencies": [\
+          ["animejs", "npm:4.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["ansi-regex", [\
       ["npm:5.0.1", {\
         "packageLocation": "../../../.yarn/berry/cache/ansi-regex-npm-5.0.1-c963a48615-10c0.zip/node_modules/ansi-regex/",\
@@ -981,6 +991,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["min-hourglass", "workspace:."],\
+          ["animejs", "npm:4.0.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["vite", "virtual:ee250a8850777ee340994b6f1f1bfd30aa99ba32308d6ee7b67d1b6c8294e7c90cb41fd88f4dbc5f3f2313f1d4bfc726eb2810127927092324ea650cc18b879f#npm:6.3.5"]\
         ],\

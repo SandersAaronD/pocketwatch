@@ -393,6 +393,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"animejs@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "animejs@npm:4.0.2"
+  checksum: 10c0/1889e145d61104a7531852ab7111e9077389047de9d5761288bb7ee4bdacd36184166a718279acd3fe8d1a3c3b45ebda681a505e2162a6c18d468d5103ba8a13
+  languageName: node
+  linkType: hard
+
 "ansi-regex@npm:^5.0.1":
   version: 5.0.1
   resolution: "ansi-regex@npm:5.0.1"
@@ -839,6 +846,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "min-hourglass@workspace:."
   dependencies:
+    animejs: "npm:^4.0.2"
     typescript: "npm:~5.8.3"
     vite: "npm:^6.3.5"
   languageName: unknown
