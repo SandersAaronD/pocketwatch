@@ -82,6 +82,84 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+#timer-display {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0 0 2rem 0;
+  min-height: 1.5em;
+}
+
+#timer-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 1rem;
+  user-select: none;
+  /* Prevent text selection while dragging */
+}
+
+.dial-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  cursor: ns-resize;
+  /* Draggable cursor */
+}
+
+#timer-inputs.disabled .dial {
+  cursor: not-allowed;
+}
+
+.dial-display {
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  min-width: 60px;
+  text-align: center;
+}
+
+.dial-btn {
+  border: none;
+  background: none;
+  color: #646cff;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0.25rem 1rem;
+  line-height: 1;
+}
+
+.dial-btn:hover {
+  color: #535bf2;
+}
+
+.dial-btn:disabled {
+  color: #3a3a3a;
+  cursor: not-allowed;
+}
+
+.dial-label {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.dial-separator {
+  font-size: 2em;
+  color: #888;
+  padding-bottom: 2rem;
+  /* Align with dial display */
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -93,4 +171,11 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+    .dial {
+      background-color: #f9f9f9;
+    }
+  
+    .dial-btn:disabled {
+      color: #cccccc;
+    }
 }
