@@ -7,27 +7,21 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div id="timer-inputs">
         <div class="dial-container">
             <div class="dial">
-                <button class="dial-btn up-btn" data-unit="hours">▲</button>
                 <div class="dial-display" id="hours-display">00</div>
-                <button class="dial-btn down-btn" data-unit="hours">▼</button>
             </div>
             <div class="dial-label">Hours</div>
         </div>
         <div class="dial-separator">:</div>
         <div class="dial-container">
             <div class="dial">
-                <button class="dial-btn up-btn" data-unit="minutes">▲</button>
                 <div class="dial-display" id="minutes-display">01</div>
-                <button class="dial-btn down-btn" data-unit="minutes">▼</button>
             </div>
             <div class="dial-label">Minutes</div>
         </div>
         <div class="dial-separator">:</div>
         <div class="dial-container">
             <div class="dial">
-                <button class="dial-btn up-btn" data-unit="seconds">▲</button>
                 <div class="dial-display" id="seconds-display">30</div>
-                <button class="dial-btn down-btn" data-unit="seconds">▼</button>
             </div>
             <div class="dial-label">Seconds</div>
         </div>
