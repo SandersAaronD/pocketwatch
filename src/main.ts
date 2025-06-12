@@ -83,7 +83,7 @@ function handleDialClick(event: MouseEvent) {
 }
 
 dialButtons.forEach(button => {
-  button.addEventListener('click', handleDialClick)
+  // Removed click event listener to disable on-click increment/decrement
 })
 
 // Drag logic
@@ -120,10 +120,11 @@ function onDragMove(event: MouseEvent | TouchEvent) {
     const unit = activeDragUnit
 
     if (unit === 'minutes' || unit === 'seconds') {
-        const range = 60
-        newValue = (newValue % range + range) % range // Wraps around
+        // Clamp between 0 and 59
+        newValue = Math.max(0, Math.min(59, newValue))
     } else { // hours
-        newValue = Math.max(0, newValue)
+        // Clamp between 0 and 24
+        newValue = Math.max(0, Math.min(24, newValue))
     }
 
     if (time[unit] !== newValue) {
