@@ -3,7 +3,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # Or your default branch
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   build-and-deploy:
