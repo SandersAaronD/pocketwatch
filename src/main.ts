@@ -32,7 +32,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
 const startBtn = document.querySelector<HTMLButtonElement>('#start-btn')!
 const timerDisplay = document.querySelector<HTMLParagraphElement>('#timer-display')!
-const dialButtons = document.querySelectorAll<HTMLButtonElement>('.dial-btn')
 const timerInputs = document.querySelector<HTMLDivElement>('#timer-inputs')!
 
 const time = {
@@ -56,29 +55,6 @@ function updateAllDisplays() {
         updateDisplay(unit)
     }
 }
-
-function handleDialClick(event: MouseEvent) {
-  const target = event.currentTarget as HTMLButtonElement
-  const unit = target.dataset.unit as 'hours' | 'minutes' | 'seconds'
-  const direction = target.classList.contains('up-btn') ? 1 : -1
-
-  let currentValue = time[unit]
-  currentValue += direction
-
-  if (unit === 'minutes' || unit === 'seconds') {
-    if (currentValue > 59) currentValue = 0
-    if (currentValue < 0) currentValue = 59
-  } else { // hours
-    if (currentValue < 0) currentValue = 0
-  }
-
-  time[unit] = currentValue
-  updateDisplay(unit)
-}
-
-dialButtons.forEach(button => {
-  // Removed click event listener to disable on-click increment/decrement
-})
 
 // Drag logic
 let isDragging = false
@@ -217,13 +193,9 @@ Object.entries(displays).forEach(([unit, displayElement]) => {
     parentDial.addEventListener('touchstart', (e) => onDragStart(e, unit as keyof typeof time), { passive: false })
 })
 
-
 let countdownInterval: number | undefined
 
 function setDialsEnabled(enabled: boolean) {
-    dialButtons.forEach(button => {
-        button.disabled = !enabled
-    })
     timerInputs.classList.toggle('disabled', !enabled)
 }
 
